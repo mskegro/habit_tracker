@@ -1,0 +1,450 @@
+﻿Proposal
+
+
+Student Name: Marina Skegro 
+Degree and Major: Bachelor of Science in Computer Science
+Project Advisor Name: Professor Julie Henderson 
+Expected Graduation Date: May 2026
+Problem Statement
+Developing and maintaining productive habits is a challenge for many individuals. The ideal scenario would be a system that seamlessly integrates into daily life, motivates users, and encourages habit formation through engaging techniques. Traditional habit-tracking apps lack dynamic motivation, making it easy for users to lose interest and abandon their progress.
+The problem is that users struggle with long-term habit adherence due to a lack of consistent motivation and engagement. Studies suggest that gamification can significantly improve user retention and motivation by incorporating elements like rewards, progress tracking, and competition. However, many existing habit trackers fail to effectively utilize gamification principles, leading to reduced user engagement.
+A gamified habit tracker mobile app will solve this problem by combining habit tracking with game-like mechanics such as XP (experience points), achievements, streaks, and social features. This approach will encourage consistent behavior while making the habit-forming process enjoyable and rewarding. By integrating these mechanics, users will be more likely to stick with their habits, leading to improved productivity and well-being.
+Project Description
+The Gamified Habit Tracker will be a mobile application that allows users to set, track, and maintain habits while earning rewards and achievements for their progress. Users will accumulate XP for completing habits, level up over time, and maintain streaks to build consistency. The app will feature a visually appealing dashboard, notifications for reminders, and analytics to show progress trends. The application will also support cloud-based storage so users can sync their data across multiple devices.
+Key Features:
+* User Authentication (Google, Email, etc.).
+* Habit creation and customization.
+* XP, streaks, and level-up mechanics.
+* Achievement badges for milestones.
+* Notifications and reminders.
+* Progress analytics and reports.
+* Optional social features such as leaderboards and friend challenges.
+Proposed Implementation Language(s)
+* Dart (using Flutter framework for cross-platform development)
+Libraries, Packages, Development Kits, etc.
+* Flutter SDK - UI development 
+* Firebase Authentication - User login and authentication 
+* Cloud Firestore - Real-time NoSQL database for storing habits and progress Firebase Cloud Messaging - Push notifications for reminders
+* Flutter Local Notifications For offline reminders
+* Provider/Riverpod State management
+Additional Software/Equipment Needed
+* Android Studio / VS Code - Development environment
+* GitHub -Version control
+* Google Play Console / Apple Developer Account - For deployment
+* Physical Android/iOS devices for testing
+Personal Motivation
+My love for technology and its ability to enhance daily life is what inspired me to create a gamified habit tracker. As a student of computer science, I have always found it fascinating how software can improve user experiences, promote positive behaviour, and increase productivity. My interests in user-centered design and mobile development are well-suited to this project, which will enable me to investigate creative approaches to assisting people in forming and sustaining healthy behaviours. Personal experiences and observations of how challenging it may be to form persistent routines served as the inspiration for this project. Motivation is a problem for many people, particularly when establishing long-term healthy habits. Through the use of gamification components like challenges, progress monitoring, and rewards, I hope to make developing new habits more sustainable and enjoyable. 
+This project also gives me the chance to practice and improve my technical abilities in the creation of mobile applications. Working with modern programming frameworks, integrating databases for user progress tracking, and creating a smooth user experience that encourages interaction are all made possible by it. In addition to the technical side, I am interested in gaining skills in design thinking, demand analysis, and project management, all of which are essential for my future work in software development. My ultimate objective is to develop an application that will improve my comprehension of software engineering concepts and offer genuine benefits to individuals looking to track their habits and better their lives. This project is a significant milestone in my development career and demonstrates my dedication to creating technology that inspires and empowers others. 
+ 
+Additionally, this project serves as an opportunity to apply and refine my technical skills in mobile application development. It will enable me to work with modern development frameworks, integrate databases for user progress tracking, and implement a seamless user interface that fosters engagement. Beyond the technical aspect, I am eager to gain experience in project management, requirement analysis, and iterative design, all of which are crucial for my future career in software development.
+Ultimately, my goal is to create an application that enhances my understanding of software engineering principles and provides real value to users seeking to improve their lives through habit tracking. This project represents a meaningful step in my journey as a developer and my commitment to building technology that empowers and motivates people.
+Outline of Future Research Efforts
+To complete this project, I will:
+* Research gamification techniques for habit formation.
+* Study best practices in UI/UX design for mobile applications.
+* Optimize Firebase Firestore queries for efficiency.
+* Test and refine habit-tracking mechanics to ensure user engagement.
+* Gather feedback through user testing to improve app features.
+Expected Deliverables:
+* Fully functional mobile app (Android & iOS)
+* Source code repository with documentation
+* Research report on gamification effectiveness
+* User feedback and iteration logs
+
+
+Schedule 
+
+
+Week
+	Dates
+	Tasks
+	Week 1
+	Sep 16–22
+	*  Install Flutter, VS Code, Git 
+* Set up GitHub repo 
+* Create folders on Seagate HDD for Projects, Assets, Firebase
+*  Plan app architecture and navigation
+	Week 2
+	Sep 23–29
+	* Implement user login/register (Google and email)
+*  Set up Firestore user collection 
+* Basic UI for login, signup, home screen
+	Week 3
+	Sep 30–Oct 6
+	* Habit creation, editing, deletion
+*  Save habits in Firestore 
+* Habit list UI
+	Week 4
+	Oct 7–13
+	*  Implement XP points for habits
+*  Track streaks (consecutive days) 
+* Update Firestore automatically
+	Week 5
+	Oct 14–20
+	* Add achievement badges for milestones 
+* Implement a leveling system
+* Display badges and levels in profile
+	Week 6
+	Oct 21–27
+	* Implement push notifications via Firebase 
+* Add local notifications for offline 
+* Allow users to set reminder times
+	Week 7
+	Oct 28–Nov 3
+	* Implement analytics screen
+*  Show graphs: weekly/monthly XP and streaks
+*  Use Flutter chart library
+	Week 8
+	Nov 4–10
+	*  Refine dashboard, habit cards, colors, fonts
+*  Add animations for XP and habit completion
+*  Test dark/light mode toggle
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requirements Document
+Project Name: Gamified Habit Tracker
+Student Name: Marina Skegro
+Degree and Major: Bachelor of Science in Computer Science
+Project Advisor Name: Professor Julie Henderson
+Expected Graduation Date: May 2026
+
+
+1. Functional Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	F-01
+	Functional
+	Users can create and customize habits with names, descriptions, and recurrence settings.
+	Users need flexibility to track various habits.
+	The user should be able to create at least five habits during a session.
+	High
+	None
+	F-02
+	Functional
+	Users earn experience points (XP) for completing habits.
+	Gamification motivates users to engage with the app.
+	XP should update immediately after habit completion.
+	High
+	F-01
+	F-03
+	Functional
+	Users can track their habit streaks.
+	Streak tracking encourages consistent habit formation.
+	The app should display streak count for each habit.
+	High
+	F-01
+	F-04
+	Functional
+	Users can unlock achievement badges upon reaching milestones.
+	Badges encourage long-term habit tracking.
+	Achievements should appear in the user profile when unlocked.
+	Medium
+	F-03
+	F-05
+	Functional
+	Users can view habit progress analytics.
+	Visualizing progress motivates habit consistency.
+	Show simple progress graphs, such as weekly or daily trends.
+	Medium
+	F-01
+	F-06
+	Functional
+	Users can receive habit reminders via notifications.
+	Reminders improve consistency but are not essential for initial release. 
+	The notification should trigger at the set time, if they are enabled.
+	Low
+	F-01
+	F-07
+	Functional
+	Users can sync data across multiple devices.
+	Data should be accessible across different devices.
+	Data should sync on a different logged-in device.
+	High
+	None
+	2. Look and Feel Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	LF-01
+	Appearance
+	The app should have a clean, user-friendly interface.
+	Enhances user experience with a simple, pleasant look.
+	Should have a clear layout with easy-to-read fonts and consistent color schemes. 
+	Medium
+	None
+	LF-02
+	Style
+	Include basic animations for XP gain and habit completion. 
+	Adds a playful touch to gamification.
+	Display a simple animation upon XP increase or habit completion.
+	Low
+	F-02, F-04
+	
+
+
+
+
+
+3. Usability Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	U-01
+	Ease of Use
+	The app should have a simple and intuitive navigation.
+	Reduces complexity and enhances the user experience. 
+	Users should be able to perform the main actions without confusion.
+	High
+	None
+	U-02
+	Learning
+	Provide a brief tutorial or guide on the first launch of the app. 
+	Helps new users understand the app’s purpose and features.
+	Tutorial or guide should appear on the first login and should be accessible at any time.
+	Medium
+	F-01
+	U-03 
+	Personalization and Internationalization 
+	Allow users to choose light or dark mode.
+	Supports comfort and accessibility for a wider user base.
+	Users should be able to switch themes in the settings menu.
+	Medium
+	None
+	U-04
+	Understandability and Politeness
+	Use clear and friendly language throughout the interface.
+	Improves communication and makes the app feel more welcoming.
+	All error messages should be easy to understand and written in clear language.
+	Medium
+	None
+	U-05
+	Accessibility
+	The app should use readable fonts, clear contrast, and support larger system text sizes. 
+	Improves usability for users with visual preferences or impairments. 
+	Users should be able to read text clearly, even with device settings for larger text.
+	Medium
+	None
+	U-06
+	Convenience
+	The app should allow quick access to frequently used features from the home screen. 
+	Improves user efficiency and sncourages consistent use. 
+	Users should be able to access habit tracking and progress with no more than one tap from the dashboard. 
+	Medium
+	None
+	4. Performance Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	P-01
+	Speed and Latency
+	The app should load the main dashboard within 3-5 seconds.
+	Ensures a smooth user experience.
+	Measure load time with Firebase profiling tools.
+	High
+	None
+	P-02
+	Scalability
+	The app should handle an increasing amount of data and user activities without performance degradation.
+	Ensures smooth performance as app usage grows.
+	Performance tests should show that data processing, syncing, and UI responsiveness remain stable.
+	High
+	None
+	P-03
+	Robustness
+	The app should automatically sync data when network connectivity is restored.
+	Ensures data integrity during connectivity issues.
+	Sync data once the network is available after the connection is restored.
+	High
+	F-07
+	P-04
+	Reliability and Availability
+	The app should be usable 95% of the time during testing.
+	Ensures that users can access the app consistently.
+	Test uptime during repeated simulated sessions and check for crashes or loading issues. 
+	Medium
+	None
+	P-05
+	Longevity
+	The app should be easy to update manually.
+	Allows for future improvements.
+	Can replace files and rebuild the app without errors. 
+	Medium
+	None
+	P-06
+	Capacity 
+	The app should support up to 50 stored habits per user without slowing down.
+	Ensures usability without performance drops.
+	Test response time while interacting with 50 habits.
+	Medium
+	F-01
+	P-07
+	Precision or Accuracy 
+	Habit streaks and XP calculations should be accurate and updated correctly.
+	Avoids errors in gamification logic and user stats.
+	Test data consistency by completing and undoing habits multiple times.
+	High
+	F-02, F-03
+	P-08 
+	Safety- Critical 
+	The app should not crash or corrupt data when suddenly closed.
+	Prevents data loss and ensures the safety of user inputs.
+	Simulate force-closing the app and check for saved state and no corrupted data.
+	High
+	F-01,
+F-07
+	5. Maintainability Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	M-01
+	Version Control
+	Use version control for source code management.
+	Tracks changes and improves collaboration.
+	Code should be maintained on GitHub.
+	High
+	None
+	M-02
+	Data Saving
+	Save user data when habits are marked or the screen is exited. 
+	Prevents accidental loss.
+	Data appears correctly when the app is reopened.
+	High
+	None
+	 6. Security Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	S-01
+	Integrity
+	Use Firebase with secure Firestore rules to protect user data.
+	Protects sensitive information.
+	Only authenticated users can access their data.
+	High
+	None
+	S-02
+	Access
+	Implement Google (and optionally Email)  login using Firebase.
+	Easy and secure access.
+	Users can log in using Google.
+	High
+	None
+	S-03
+	Audit
+	Track last login and recent habit changes per user.
+	Basic user activity tracking. 
+	Visible in Firestone under each user profile.
+	Low
+	None
+	S-04
+	Privacy
+	Add a setting toggle for data-sharing consent.
+	Ensures user privacy.
+	Toggle exists in the settings screen.
+	High
+	None
+	S-05
+	Immunity
+	Use Firestore rules to restrict access to authorized users only.
+	Prevents unauthorized access.
+	Unauthorized access attempts return permission denied. 
+	High
+	S-01
+	
+
+7. Cultural Requirements
+ID
+	Type
+	Description
+	Rationale
+	Fit Criterion
+	Priority
+	Dependencies
+	C-01
+	Emoji Localization
+	The app should have culturally neutral or globally recognized emojis in rewards.
+	Avoids emojis that may be offensive or misunderstood in some cultures.
+	Only culturally safe emojis are used across all app messages.
+	Medium
+	None
+	C-02
+	Time Format
+	Let users choose between 12-hour and 24-hour clock formats.
+	Time is displayed differently in different parts of the world.
+	Users can toggle time format in settings.
+	Low
+	None
+	C-03
+	Color Sensitivity
+	Avoid colors with strong cultural symbolism.
+	Prevents confusion or miscommunication due to color meanings.
+	UI color palette avoids culturally sensitive combinations. 
+	Low
+	None
+	
+
+User interface mockup design 
+ Image preview 
+ Image preview
