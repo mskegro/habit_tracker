@@ -1,0 +1,14 @@
+dependencies: \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/AppAuth.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenRequest.m \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/Target\ Support\ Files/AppAuth/AppAuth-prefix.pch \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenRequest.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDGrantTypes.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDDefines.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDError.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDScopeUtilities.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDServiceConfiguration.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDURLQueryComponent.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/AppAuth/Sources/AppAuthCore/OIDTokenUtilities.h

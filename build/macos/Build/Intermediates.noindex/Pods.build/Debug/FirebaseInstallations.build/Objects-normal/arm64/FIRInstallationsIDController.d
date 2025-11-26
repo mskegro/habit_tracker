@@ -1,0 +1,31 @@
+dependencies: \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/FirebaseInstallations.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRInstallationsIDController.m \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRInstallationsIDController.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/PromisesObjC.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromises.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/GoogleUtilities.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FirebaseCoreInternal.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/FirebaseCore.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRComponent.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRComponentType.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseCore/Extension/FIRLogger.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Errors/FIRInstallationsErrorUtil.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Public/FirebaseInstallations/FIRInstallationsErrors.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/FIRInstallationsItem.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRInstallationsStatus.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/FIRInstallationsLogger.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/IIDMigration/FIRInstallationsIIDStore.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/IIDMigration/FIRInstallationsIIDTokenStore.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsAPI/FIRInstallationsAPIService.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRInstallationsBackoffController.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRCurrentDateProvider.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsIDController/FIRInstallationsSingleOperationPromiseCache.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsStore/FIRInstallationsStore.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Errors/FIRInstallationsHTTPError.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/InstallationsStore/FIRInstallationsStoredAuthToken.h

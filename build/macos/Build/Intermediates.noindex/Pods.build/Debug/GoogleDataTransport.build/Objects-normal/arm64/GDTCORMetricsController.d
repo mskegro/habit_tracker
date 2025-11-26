@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/GoogleDataTransport.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/GDTCORMetricsController.m \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORMetricsController.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORMetricsControllerProtocol.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCOREventDropReason.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORStorageProtocol.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORLifecycle.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORPlatform.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/SystemConfiguration.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Modules/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORStorageEventSelector.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCORTargets.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORStorageSizeBytes.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/PromisesObjC.build/module.modulemap \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/PromisesObjC/Sources/FBLPromises/include/FBLPromises.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCORConsoleLogger.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCOREvent.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCOREventDataObject.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORRegistrar.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Internal/GDTCORUploader.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCORClock.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORFlatFileStorage+Promises.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORFlatFileStorage.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORLogSourceMetrics.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORMetrics.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORMetricsMetadata.h \
+  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Private/GDTCORStorageMetadata.h
