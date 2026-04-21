@@ -85,3 +85,21 @@ To complete this project, I will:
 | **Week 6** | Oct 21–27 | Add local notifications for offline. Allow users to set reminder times. |
 | **Week 7** | Oct 28–Nov 3 | Implement analytics screen. Show graphs: weekly/monthly XP and streaks. Use Flutter chart library. |
 | **Week 8** | Nov 4–10 | Refine dashboard, habit cards, colors, fonts. Add animations for XP and habit completion. |
+
+
+# Senior Project Implementation/Defense Schedule
+
+| Week | Dates | Tasks |
+|---|---|---|
+| **Week 1** | Feb 1–7 | - Achievements screen — fixing bugs  - Finish schedule |
+| **Week 2** | Feb 8–14 | - Testing UI and data collection  - Fixing bugs  - Organizing presentation |
+| **Week 3** | Feb 15–21 | - Test results done  - Start working on the project implementation description |
+| **Week 4** | Feb 22–28 | - Polish up the code  - Work on deploying the app on the phone |
+| **Week 5** | Mar 1–7 | - Finish project implementation description  - Start research and background slides |
+| **Week 6** | Mar 8–14 | - Finish research and background |
+| **Week 7** | Mar 15–21 | - Complete implementation slides  - Organize full PowerPoint structure |
+| **Week 8** | Mar 22–28 | - Create challenges overcome slides and future enhancements |
+| **Week 9** | Mar 29–Apr 4 | - Full PowerPoint done |
+| **Week 10** | Apr 5–11 | - Full demo and run-through practice |
+| **Week 11** | Apr 12–18 | - Advisor feedback and final revisions |
+| **Week 12** | Apr 18–20 | - Final submission and student exit survey |
