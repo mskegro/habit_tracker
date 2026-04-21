@@ -1122,12 +1122,12 @@ Cloud-based storage ensures data accessibility across multiple devices.
 
 | Expected Result | Pass/Fail |
 |---|---|
-| Tutorial/guide appears on first login | ❌ Not Implemented |
-| Tutorial explains app's purpose and features | ❌ Not Implemented |
-| Tutorial is brief (2-3 minutes) | ❌ Not Implemented |
-| Tutorial can be skipped if user chooses | ❌ Not Implemented |
-| Tutorial accessible anytime from settings (U-02) | ❌ Not Implemented |
-| Tutorial helps users understand app | ❌ Not Implemented |
+| Tutorial/guide appears on first login | 🔄 Future Work  |
+| Tutorial explains app's purpose and features | 🔄 Future Work  |
+| Tutorial is brief (2-3 minutes) | 🔄 Future Work  |
+| Tutorial can be skipped if user chooses | 🔄 Future Work  |
+| Tutorial accessible anytime from settings (U-02) | 🔄 Future Work  |
+| Tutorial helps users understand app | 🔄 Future Work  |
 
 > **Note:** A first-launch tutorial was planned as part of requirement U-02 but was not implemented in the current version due to time constraints. The app's intuitive navigation and simple UI design were sufficient for users to onboard without guidance, as reflected in the UAT survey results where Navigation received a perfect 5.0 score. A tutorial feature is identified as a priority improvement for future development.
 
