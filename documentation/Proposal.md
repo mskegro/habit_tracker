@@ -41,9 +41,8 @@ Proposed Implementation Language(s)
 
 ## Additional Software/Equipment Needed
 
-* Android Studio / VS Code \- Development environment  
+* VS Code \- Development environment  
 * GitHub \-Version control  
-* Google Play Console / Apple Developer Account \- For deployment  
 * Physical Android/iOS devices for testing
 
 ## Personal Motivation
@@ -70,8 +69,7 @@ To complete this project, I will:
 Expected Deliverables:
 
 * Fully functional mobile app (Android & iOS)  
-* Source code repository with documentation  
-* Research report on gamification effectiveness  
+* Source code repository with documentation   
 * User feedback and iteration logs
 
 # Schedule 
