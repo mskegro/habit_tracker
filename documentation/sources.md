@@ -81,7 +81,7 @@
 
 ---
 
-## Flutter Widget & API Reference
+## Flutter Widget
 
 - DateFormat - https://api.flutter.dev/flutter/intl/DateFormat-class.html
 - SafeArea - https://api.flutter.dev/flutter/widgets/SafeArea-class.html
@@ -137,7 +137,7 @@
 - Flutter Firebase setup tutorial - https://www.youtube.com/watch?v=7vLbtDMfrno
 - Flutter Firebase authentication tutorial - https://www.youtube.com/watch?v=4vKiJZNPhss
 - Flutter Provider state management tutorial - https://www.youtube.com/watch?v=CvRkyxJn2Fc
-- Flutter & Firebase app build (Net Ninja) - https://www.youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC
+- Flutter & Firebase app build - https://www.youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC
 - Flutter Firebase tutorial playlist - https://www.youtube.com/playlist?list=PLjVLYmrlmjGeA6_i1WOallrMbTzZtBcp8
 - Flutter & Firebase beginner to pro 2024 (8 real projects) - https://www.youtube.com/watch?v=v0eHD-PD88g
 - Flutter & Firebase full course 2024 (7 real projects) - https://youtu.be/6c3IH-DFODw?si=LbS_jxAhyIBxTuGZ
