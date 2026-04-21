@@ -185,5 +185,3 @@ Expected Deliverables:
 | C-02 | Time Format | Let users choose between 12-hour and 24-hour clock formats. | Time is displayed differently in different parts of the world. | Users can toggle time format in settings. | Low | None |
 | C-03 | Color Sensitivity | Avoid colors with strong cultural symbolism. | Prevents confusion or miscommunication due to color meanings. | UI color palette avoids culturally sensitive combinations.  | Low | None |
 
-# User interface mockup design 
-
