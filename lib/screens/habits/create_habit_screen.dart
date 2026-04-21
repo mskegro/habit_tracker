@@ -105,20 +105,15 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
   ],
 
   'quit': [
-    {'name': 'No Negative Self Talk', 'icon': '😌', 'unit': 'day', 'target': 1, 'color': '#E74C3C', 'trackingStyle': 'simple'},
-    {'name': 'No Mindless Scrolling', 'icon': '📵', 'unit': 'day', 'target': 1, 'color': '#C0392B', 'trackingStyle': 'simple'},
     {'name': 'No Junk Food', 'icon': '🥦', 'unit': 'day', 'target': 1, 'color': '#27AE60', 'trackingStyle': 'simple'},
     {'name': 'No Social Media', 'icon': '📱', 'unit': 'day', 'target': 1, 'color': '#C95D1F', 'trackingStyle': 'simple'},
-    {'name': 'No People Pleasing', 'icon': '🙅‍♀️', 'unit': 'day', 'target': 1, 'color': '#229954', 'trackingStyle': 'simple'},
     {'name': 'No Snooze Button', 'icon': '⏰', 'unit': 'day', 'target': 1, 'color': '#7D3C98', 'trackingStyle': 'simple'},
     {'name': 'No Late Nights', 'icon': '🌙', 'unit': 'day', 'target': 1, 'color': '#5D6D7E', 'trackingStyle': 'simple'},
     {'name': 'No Caffeine After 2PM', 'icon': '☕', 'unit': 'day', 'target': 1, 'color': '#6E2C00', 'trackingStyle': 'simple'},
     {'name': 'No Sugar Drinks', 'icon': '🥤', 'unit': 'day', 'target': 1, 'color': '#922B21', 'trackingStyle': 'simple'},
     {'name': 'No Late Snacking', 'icon': '🍪', 'unit': 'day', 'target': 1, 'color': '#B03A2E', 'trackingStyle': 'simple'},
     {'name': 'No Complaining', 'icon': '🙊', 'unit': 'day', 'target': 1, 'color': '#1ABC9C', 'trackingStyle': 'simple'},
-    {'name': 'No Gossip', 'icon': '🤐', 'unit': 'day', 'target': 1, 'color': '#16A085', 'trackingStyle': 'simple'},
     {'name': 'No Overthinking', 'icon': '🧩', 'unit': 'day', 'target': 1, 'color': '#117A65', 'trackingStyle': 'simple'},
-    {'name': 'No Self-Comparison', 'icon': '🪞', 'unit': 'day', 'target': 1, 'color': '#148F77', 'trackingStyle': 'simple'},
     {'name': 'No Procrastination', 'icon': '🐌', 'unit': 'day', 'target': 1, 'color': '#2874A6', 'trackingStyle': 'simple'},
     {'name': 'No Unplanned Purchases', 'icon': '🛒', 'unit': 'day', 'target': 1, 'color': '#196F3D', 'trackingStyle': 'simple'},
     {'name': 'No TV Before Bed', 'icon': '📺', 'unit': 'day', 'target': 1, 'color': '#7B7D7D', 'trackingStyle': 'simple'},
@@ -151,7 +146,7 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
           Container(
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFFFF6B9D),
+              color: const Color.fromARGB(255, 156, 40, 156),
               borderRadius: BorderRadius.circular(12),
             ),
             child: IconButton(
@@ -209,7 +204,7 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
               child: ElevatedButton(
                 onPressed: () => _showDetailedCustomHabitScreen(),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 167, 94, 180),
+                  backgroundColor: const Color.fromARGB(255, 182, 89, 199),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28),
                   ),
@@ -259,9 +254,9 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFFFE4E6) : const Color(0xFFF8FAFC),
+          color: isSelected ? const Color.fromARGB(255, 217, 172, 246) : const Color(0xFFF8FAFC),
           shape: BoxShape.circle,
-          border: isSelected ? Border.all(color: const Color(0xFFFF6B9D), width: 2) : null,
+          border: isSelected ? Border.all(color: const Color.fromARGB(255, 154, 12, 161), width: 2) : null,
         ),
         child: Text(emoji, style: const TextStyle(fontSize: 24)),
       ),
@@ -336,12 +331,12 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
                   IconButton(
                     icon: Icon(
                       isFavorited ? Icons.favorite : Icons.favorite_border,
-                      color: const Color(0xFFFF6B9D),
+                      color: const Color.fromARGB(255, 201, 116, 227),
                     ),
                     onPressed: () => _toggleFavorite(habit, isFavorited, docId),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.add, color: Color(0xFF06B6D4)),
+                    icon: const Icon(Icons.add, color: Color.fromARGB(255, 200, 111, 239)),
                     onPressed: () => _showDetailedHabitScreen(habit),
                   ),
                 ],
@@ -377,7 +372,7 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Tap ❤️ on habits to save them here',
+                  'Tap 💜 on habits to save them here',
                   style: TextStyle(color: Color(0xFF64748B)),
                 ),
               ],
@@ -446,8 +441,8 @@ final Map<String, List<Map<String, dynamic>>> _habitsByCategory = {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('❤️ Added to favorites!'),
-              backgroundColor: Color(0xFFFF6B9D),
+              content: Text('💜 Added to favorites!'),
+              backgroundColor: Color.fromARGB(255, 156, 36, 220),
               duration: Duration(seconds: 1),
             ),
           );
@@ -499,7 +494,7 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
   late TextEditingController _targetController;
   late TextEditingController _unitController;
   late TextEditingController _iconController;
-  late TextEditingController _xpController;  // NEW: XP Controller
+  late TextEditingController _xpController; 
   
   String _selectedIcon = '✓';
   Color _selectedColor = const Color(0xFF5B9BD5);
@@ -507,7 +502,7 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
   String _goalPeriod = 'Day-Long';
   String _timeRange = 'Anytime';
   String _trackingStyle = 'simple';
-  bool _remindersEnabled = true;
+  bool _remindersEnabled = false;
   List<TimeOfDay> _reminderTimes = [];
 
   @override
@@ -516,7 +511,7 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
     _nameController = TextEditingController(text: widget.habitTemplate?['name'] ?? '');
     _targetController = TextEditingController(text: (widget.habitTemplate?['target'] ?? 1).toString());
     _unitController = TextEditingController(text: widget.habitTemplate?['unit'] ?? 'times');
-    _xpController = TextEditingController(text: '10');  // NEW: Initialize XP to default 10
+    _xpController = TextEditingController(text: '10');  
     _selectedIcon = widget.habitTemplate?['icon'] ?? '✓';
     _iconController = TextEditingController(text: _selectedIcon);
     _trackingStyle = widget.habitTemplate?['trackingStyle'] ?? 'simple';
@@ -526,7 +521,6 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
       _selectedColor = Color(int.parse(colorHex.replaceFirst('#', '0xFF')));
     }
     
-    _reminderTimes = [const TimeOfDay(hour: 19, minute: 30)];
   }
 
   @override
@@ -535,7 +529,7 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
     _targetController.dispose();
     _unitController.dispose();
     _iconController.dispose();
-    _xpController.dispose();  // NEW: Dispose XP controller
+    _xpController.dispose(); 
     super.dispose();
   }
 
@@ -825,7 +819,6 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
 
           const SizedBox(height: 12),
 
-          // NEW: XP Value Section
           _buildSection(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1145,7 +1138,7 @@ class _DetailedHabitScreenState extends State<DetailedHabitScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('✅ ${_nameController.text} habit updated!'),
-              backgroundColor: const Color(0xFF06B6D4),
+              backgroundColor: const Color.fromARGB(255, 184, 226, 233),
             ),
           );
           Navigator.pop(context);

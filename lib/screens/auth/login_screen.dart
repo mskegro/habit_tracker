@@ -193,12 +193,13 @@ class _LoginPageState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Logo or icon
-                      const Icon(
-                        Icons.rocket_launch,
-                        size: 64,
-                        color: Colors.deepPurple,
+                      // Logo 
+                     const Center(
+                      child: Text(
+                        '💜',
+                        style: TextStyle(fontSize: 64),
                       ),
+                    ),
                       const SizedBox(height: 24),
                       
                       const Text(
@@ -210,7 +211,7 @@ class _LoginPageState extends State<LoginScreen> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 24),
                       const Text(
                         "Log in to continue your habit journey!",
                         textAlign: TextAlign.center,
@@ -261,16 +262,96 @@ class _LoginPageState extends State<LoginScreen> {
                       const SizedBox(height: 8),
 
                       // Forgot password
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            // TODO: Implement forgot password
-                          },
-                          child: const Text("Forgot Password?"),
-                        ),
+                     Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          final emailController = TextEditingController();
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: const Text('Reset Password'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Enter your email address and we will send you a link to reset your password.',
+                                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  TextField(
+                                    controller: emailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    decoration: InputDecoration(
+                                      labelText: 'Email',
+                                      prefixIcon: const Icon(Icons.email_outlined),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('Cancel'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    if (emailController.text.trim().isEmpty) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Please enter your email')),
+                                      );
+                                      return;
+                                    }
+                                    try {
+                                      await FirebaseAuth.instance.sendPasswordResetEmail(
+                                        email: emailController.text.trim(),
+                                      );
+                                      if (context.mounted) {
+                                        Navigator.pop(context);
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text('✅ Password reset email sent! Check your inbox.'),
+                                            backgroundColor: Color(0xFF10B981),
+                                            duration: Duration(seconds: 4),
+                                          ),
+                                        );
+                                      }
+                                    } catch (e) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text('Error: $e'),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.deepPurple,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Send Reset Link',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        child: const Text("Forgot Password?"),
                       ),
-                      const SizedBox(height: 24),
+                    ),
+                    const SizedBox(height: 24),
 
                       ElevatedButton(
                         onPressed: _isLoading ? null : _loginWithEmail,

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../services/firestore_service.dart';
+
 
 class HabitProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -98,6 +100,21 @@ class HabitProvider with ChangeNotifier {
         'totalHabitsCompleted': (userData['totalHabitsCompleted'] ?? 0) + 1,
       });
 
+  await _firestore.collection('users').doc(user.uid).update({
+  'totalXP': newTotalXP,
+  'totalHabitsCompleted': (userData['totalHabitsCompleted'] ?? 0) + 1,
+});
+
+print('🔍 About to check achievements for user: ${user.uid}');
+try {
+  final firestoreService = FirestoreService();
+  final newAchievements = await firestoreService.checkAndUnlockAchievements(user.uid);
+  print('✅ Finished checking achievements. Found ${newAchievements.length} new ones');
+} catch (e) {
+  print('❌ ERROR checking achievements: $e');
+}
+
+await loadHabits();
       await loadHabits();
     } catch (e) {
       print('Error completing habit: $e');

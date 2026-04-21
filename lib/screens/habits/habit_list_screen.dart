@@ -602,7 +602,7 @@ class AnimatedLinesPainter extends CustomPainter {
       canvas.drawPath(path, paint);
     }
 
-    // Draw diagonal lines
+    // Diagonal lines
     for (int i = -2; i < 3; i++) {
       final startX = (animationValue * 300) % size.width + (i * 100);
       final startY = -50 + (animationValue * 150) % size.height;

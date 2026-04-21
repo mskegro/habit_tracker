@@ -245,7 +245,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(height: 8),
                         
                         const Text(
-                          'Start your habit journey today! 🚀',
+                          'Start your habit journey today! 💜',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),

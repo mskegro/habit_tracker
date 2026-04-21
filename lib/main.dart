@@ -88,16 +88,16 @@ class MyApp extends StatelessWidget {
             
             initialRoute: '/',
             routes: {
-              '/': (context) => const SplashScreen(),
-              '/login': (context) => const LoginScreen(),
-              '/register': (context) => const RegisterScreen(),
-              '/dashboard': (context) => const DashboardScreen(),
-              '/habits': (context) => const HabitListScreen(),
-              '/create-habit': (context) => const CreateHabitScreen(),
-              '/profile': (context) => const ProfileScreen(),
-              '/analytics': (context) => const AnalyticsScreen(),
-              '/settings': (context) => const SettingsScreen(),
-              '/achievements': (context) => const AchievementsScreen(),  
+              '/': (context) => SplashScreen(),
+              '/login': (context) => LoginScreen(),
+              '/register': (context) => RegisterScreen(),
+              '/dashboard': (context) => DashboardScreen(),
+              '/habits': (context) => HabitListScreen(),
+              '/create-habit': (context) => CreateHabitScreen(),
+              '/profile': (context) => ProfileScreen(),
+              '/analytics': (context) => AnalyticsScreen(),
+              '/settings': (context) => SettingsScreen(),
+              '/achievements': (context) => AchievementsScreen(),  
             },
             
             onGenerateRoute: (settings) {

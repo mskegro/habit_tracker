@@ -1,5 +1,0 @@
-dependencies: \
-  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/build/macos/Build/Intermediates.noindex/Pods.build/Debug/GoogleSignIn.build/module.modulemap \
-  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAppCheck/UI/GIDActivityIndicatorViewController.m \
-  /Users/marinaskegro/Documents/FlutterProjects/habit_tracker/macos/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAppCheck/UI/GIDActivityIndicatorViewController.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap

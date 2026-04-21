@@ -7,6 +7,9 @@ import 'package:gamified_habit_tracker/widgets/purple_background.dart';
 import 'package:gamified_habit_tracker/screens/habits/habit_detail_screen.dart';
 import 'package:gamified_habit_tracker/services/confetti_service.dart';
 import 'dart:math' as math;
+import 'package:gamified_habit_tracker/services/firestore_service.dart';
+import 'package:gamified_habit_tracker/services/firestore_service.dart';
+
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -35,6 +38,10 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       duration: const Duration(seconds: 20),
       vsync: this,
     )..repeat();
+    
+      if (user != null) {
+    FirestoreService().checkAndResetStreaks(user!.uid);
+  }
   }
 
   @override
@@ -104,18 +111,20 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       ),
       bottomNavigationBar: BottomNavBar(currentRoute: '/dashboard'),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 70),
-        child: FloatingActionButton(
-          onPressed: () async {
-            final result = await Navigator.pushNamed(context, '/create-habit');
-            if (result == true) {
-              setState(() {});
-            }
-          },
-          backgroundColor: const Color(0xFFFBBF24),
-          child: const Icon(Icons.add, size: 32, color: Colors.white),
-        ),
-      ),
+  padding: const EdgeInsets.only(bottom: 320),
+  child: FloatingActionButton.small(
+    onPressed: () async {
+      final result = await Navigator.pushNamed(context, '/create-habit');
+      if (result == true) {
+        setState(() {});
+      }
+    },
+    backgroundColor: const Color.fromARGB(255, 152, 95, 183),
+    child: const Icon(Icons.add, size: 20, color: Colors.white),
+  ),
+),
+floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
     );
   }
 
@@ -812,15 +821,28 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
         'level': newLevel,
         'xpToNextLevel': xpToNextLevel,
       });
+      print('🔍 About to check achievements from dashboard');
+try {
+  final firestoreService = FirestoreService();
+  final newAchievements = await firestoreService.checkAndUnlockAchievements(user.uid);
+  print('✅ Checked achievements. Found ${newAchievements.length} new ones');
+} catch (e) {
+  print('❌ ERROR checking achievements: $e');
+}
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('✅ ${habitData['name']} completed! +$xpValue XP'),
-            backgroundColor: const Color(0xFF10B981),
-            duration: const Duration(seconds: 2),
-            behavior: SnackBarBehavior.floating,
-          ),
+        SnackBar(
+  content: Text('✅ ${habitData['name']} completed! +$xpValue XP'),
+  backgroundColor: const Color(0xFF10B981),
+  duration: const Duration(seconds: 2),
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.only(
+    bottom: MediaQuery.of(context).size.height * 0.05,
+    left: 16,
+    right: 16,
+  ),
+),
         );
       }
     } catch (e) {

@@ -586,8 +586,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) {
-              return SizedBox(
-                width: 48,
+              return Expanded(
                 child: Center(
                   child: Text(
                     day,
@@ -596,10 +595,10 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF64748B),
                     ),
-                  ),
-                ),
-              );
-            }).toList(),
+                 ),
+               ),
+             );
+          }).toList(),
           ),
           const SizedBox(height: 8),
 
@@ -626,9 +625,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildLegendItem('🟢 All Done', Colors.green),
-              _buildLegendItem('🟠 Partial', Colors.orange),
-              _buildLegendItem('🔴 Missed', Colors.red),
+              Flexible(child: _buildLegendItem('🟢 All Done', Colors.green)),
+              Flexible(child: _buildLegendItem('🟠 Partial', Colors.orange)),
+              Flexible(child: _buildLegendItem('🔴 Missed', Colors.red)),
             ],
           ),
         ],
@@ -636,28 +635,32 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     );
   }
 
-  Widget _buildLegendItem(String label, Color color) {
-    return Row(
-      children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(2),
-          ),
+Widget _buildLegendItem(String label, Color color) {
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        width: 12,
+        height: 12,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(2),
         ),
-        const SizedBox(width: 6),
-        Text(
+      ),
+      const SizedBox(width: 6),
+      Flexible(
+        child: Text(
           label,
           style: const TextStyle(
             fontSize: 12,
             color: Color(0xFF64748B),
           ),
+          overflow: TextOverflow.ellipsis,
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
 
   List<Widget> _buildCalendarGrid(Map<int, Color> colorMap) {
     final daysInMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1, 0).day;
@@ -757,19 +760,14 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         final isPast = dayDate.isBefore(today);
 
         if (isFuture) {
-          // Future day = gray
           colorMap[day] = const Color(0xFFF1F5F9);
         } else if (completedCount >= habits.length) {
-          // All completed = green
           colorMap[day] = Colors.green;
         } else if (completedCount > 0) {
-          // Some completed = orange
           colorMap[day] = Colors.orange;
         } else if (isPast) {
-          // Past day with no completions = red
           colorMap[day] = Colors.red;
         } else {
-          // Today with no completions yet = gray
           colorMap[day] = const Color(0xFFF1F5F9);
         }
       }
@@ -781,71 +779,89 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     }
   }
 
-  Future<Map<String, double>> _getCompletionRateData() async {
-    try {
-      final now = DateTime.now();
-      final completionData = <String, double>{};
+Future<Map<String, double>> _getCompletionRateData() async {
+  try {
+    final now = DateTime.now();
+    final completionData = <String, double>{};
 
-      final dates = <DateTime>[];
-      if (_selectedPeriod == 'Week') {
-        for (int i = 6; i >= 0; i--) {
-          dates.add(now.subtract(Duration(days: i)));
-        }
-      } else if (_selectedPeriod == 'Month') {
-        for (int i = 29; i >= 0; i--) {
-          dates.add(now.subtract(Duration(days: i)));
-        }
-      } else {
-        for (int i = 11; i >= 0; i--) {
-          dates.add(DateTime(now.year, now.month - i, 1));
-        }
+    final habits = await FirebaseFirestore.instance
+        .collection('habits')
+        .where('userId', isEqualTo: user!.uid)
+        .where('isActive', isEqualTo: true)
+        .get();
+
+    if (habits.docs.isEmpty) return completionData;
+
+    final completions = await FirebaseFirestore.instance
+        .collection('completions')
+        .where('userId', isEqualTo: user!.uid)
+        .get();
+
+    final completionsByDate = <String, int>{};
+    for (var doc in completions.docs) {
+      final date = doc.data()['date'] as String?;
+      if (date != null) {
+        completionsByDate[date] = (completionsByDate[date] ?? 0) + 1;
       }
+    }
 
-      final habits = await FirebaseFirestore.instance
-          .collection('habits')
-          .where('userId', isEqualTo: user!.uid)
-          .where('isActive', isEqualTo: true)
-          .get();
-
-      if (habits.docs.isEmpty) return completionData;
-
-      final completions = await FirebaseFirestore.instance
-          .collection('completions')
-          .where('userId', isEqualTo: user!.uid)
-          .get();
-
-      final completionsByDate = <String, int>{};
-      for (var doc in completions.docs) {
-        final date = doc.data()['date'] as String?;
-        if (date != null) {
-          completionsByDate[date] = (completionsByDate[date] ?? 0) + 1;
-        }
-      }
-
-      for (final date in dates) {
-        final dateKey = _selectedPeriod == 'Year'
-            ? '${date.year}-${date.month.toString().padLeft(2, '0')}-01'
-            : '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-
+    if (_selectedPeriod == 'Week') {
+      // Show last 7 days with day labels
+      for (int i = 6; i >= 0; i--) {
+        final date = now.subtract(Duration(days: i));
+        final dateKey = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
         final completedCount = completionsByDate[dateKey] ?? 0;
         final cappedCount = completedCount.clamp(0, habits.docs.length);
         final percentage = (cappedCount / habits.docs.length) * 100;
-        
-        final label = _selectedPeriod == 'Year'
-            ? '${date.month}/${date.year}'
-            : _selectedPeriod == 'Month'
-                ? '${date.month}/${date.day}'
-                : '${date.month}/${date.day}';
-        
+        final label = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.weekday % 7];
         completionData[label] = percentage;
       }
 
-      return completionData;
-    } catch (e) {
-      print('Error getting completion data: $e');
-      return {};
+    } else if (_selectedPeriod == 'Month') {
+      // Week 1, Week 2, Week 3, Week 4
+      for (int week = 0; week < 4; week++) {
+        double totalPercentage = 0;
+        int dayCount = 0;
+        for (int day = 0; day < 7; day++) {
+          final daysAgo = (3 - week) * 7 + (6 - day);
+          final date = now.subtract(Duration(days: daysAgo));
+          final dateKey = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+          final completedCount = completionsByDate[dateKey] ?? 0;
+          final cappedCount = completedCount.clamp(0, habits.docs.length);
+          totalPercentage += (cappedCount / habits.docs.length) * 100;
+          dayCount++;
+        }
+        completionData['Wk ${week + 1}'] = totalPercentage / dayCount;
+      }
+
+    } else {
+      // Show last 12 months
+      for (int i = 11; i >= 0; i--) {
+        final monthDate = DateTime(now.year, now.month - i, 1);
+        final monthEnd = DateTime(now.year, now.month - i + 1, 0);
+        double totalPercentage = 0;
+        int dayCount = 0;
+
+        for (int day = 1; day <= monthEnd.day; day++) {
+          final date = DateTime(monthDate.year, monthDate.month, day);
+          final dateKey = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+          final completedCount = completionsByDate[dateKey] ?? 0;
+          final cappedCount = completedCount.clamp(0, habits.docs.length);
+          totalPercentage += (cappedCount / habits.docs.length) * 100;
+          dayCount++;
+        }
+
+        final monthLabel = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][monthDate.month - 1];
+        completionData[monthLabel] = totalPercentage / dayCount;
+      }
     }
+
+    return completionData;
+  } catch (e) {
+    print('Error getting completion data: $e');
+    return {};
   }
+}
 
   Future<List<FlSpot>> _getXPProgressData() async {
     try {

@@ -7,6 +7,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:confetti/confetti.dart';
 import 'package:gamified_habit_tracker/services/confetti_service.dart';
+import 'package:gamified_habit_tracker/services/firestore_service.dart';
 
 class HabitDetailScreen extends StatefulWidget {
   final String habitId;
@@ -36,33 +37,39 @@ class _HabitDetailScreenState extends State<HabitDetailScreen> with TickerProvid
   late AnimationController _pulseController;
   late ConfettiController _confettiController;
 
-  @override
-  void initState() {
-    super.initState();
-    trackingStyle = widget.habitData['trackingStyle'] ?? 'simple';
-    targetValue = ((widget.habitData['targetValue'] as num?) ?? 1).toDouble();
-    
-    final colorHex = widget.habitData['color'] ?? '#5B9BD5';
-    habitColor = Color(int.parse(colorHex.replaceFirst('#', '0xFF')));
-    
-    _loadTodayProgress();
-    
-    _progressController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
-    
-    _pulseController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    )..repeat(reverse: true);
-    
-    if (trackingStyle == 'timer') {
-      _seconds = (targetValue * 60).toInt();
-    }
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
-
+ @override
+void initState() {
+  super.initState();
+  trackingStyle = widget.habitData['trackingStyle'] ?? 'simple';
+  targetValue = ((widget.habitData['targetValue'] as num?) ?? 1).toDouble();
+  
+  final colorHex = widget.habitData['color'] ?? '#5B9BD5';
+  habitColor = Color(int.parse(colorHex.replaceFirst('#', '0xFF')));
+  
+  _progressController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 800),
+  );
+  
+  _pulseController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1000),
+  )..repeat(reverse: true);
+  
+  if (trackingStyle == 'timer') {
+    _seconds = (targetValue * 60).toInt();
   }
+  
+  _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+
+  _loadTodayProgress();
+
+  // Check and reset streak if day was missed
+  final user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    FirestoreService().checkAndResetStreaks(user.uid);
+  }
+}
 Widget _buildConfetti() {
   return Align(
     alignment: Alignment.topCenter,
@@ -121,7 +128,7 @@ Widget _buildConfetti() {
         });
         _progressController.animateTo(
           (currentValue / targetValue).clamp(0.0, 1.0),
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 500),
           curve: Curves.easeOutCubic,
         );
       }
@@ -196,16 +203,26 @@ Widget _buildConfetti() {
           xpToNextLevel = 100 + (newLevel * 50);
         }
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .update({
-          'totalXP': newTotalXP,
-          'currentLevelXP': newCurrentLevelXP,
-          'level': newLevel,
-          'xpToNextLevel': xpToNextLevel,
-        });
+      await FirebaseFirestore.instance
+    .collection('users')
+    .doc(user.uid)
+    .update({
+  'totalXP': newTotalXP,
+  'currentLevelXP': newCurrentLevelXP,
+  'level': newLevel,
+  'xpToNextLevel': xpToNextLevel,
+  'totalHabitsCompleted': FieldValue.increment(1),  // ADD THIS LINE!
+});
 
+        print('🔍 About to check achievements from habit detail');
+  try {
+  final firestoreService = FirestoreService();
+  final newAchievements = await firestoreService.checkAndUnlockAchievements(user.uid);
+  print('✅ Checked achievements. Found ${newAchievements.length} new ones');
+} catch (e) {
+  print('❌ ERROR checking achievements: $e');
+}
+  
         await _updateStreak();
 
         if (mounted) {
@@ -227,44 +244,64 @@ Widget _buildConfetti() {
       print('Error saving progress: $e');
     }
   }
-  Future<void> _updateStreak() async {
-    final habitRef = FirebaseFirestore.instance.collection('habits').doc(widget.habitId);
-    
-    try {
-      await FirebaseFirestore.instance.runTransaction((transaction) async {
-        final habitDoc = await transaction.get(habitRef);
+      Future<void> _updateStreak() async {
+        final habitRef = FirebaseFirestore.instance.collection('habits').doc(widget.habitId);
+        final user = FirebaseAuth.instance.currentUser;
         
-        if (habitDoc.exists) {
-          final data = habitDoc.data();
-          
-          int currentStreak = 0;
-          int longestStreak = 0;
-          int totalCompletions = 0;
-          
-          if (data != null) {
-            currentStreak = (data['currentStreak'] is int) 
-                ? data['currentStreak'] as int
-                : (data['currentStreak'] as num?)?.toInt() ?? 0;
+        try {
+          await FirebaseFirestore.instance.runTransaction((transaction) async {
+            final habitDoc = await transaction.get(habitRef);
             
-            longestStreak = (data['longestStreak'] is int)
-                ? data['longestStreak'] as int
-                : (data['longestStreak'] as num?)?.toInt() ?? 0;
-            
-            totalCompletions = (data['totalCompletions'] is int)
-                ? data['totalCompletions'] as int
-                : (data['totalCompletions'] as num?)?.toInt() ?? 0;
-          }
-          
-          final int newStreak = currentStreak + 1;
-          final int newLongest = newStreak > longestStreak ? newStreak : longestStreak;
-          
-          transaction.update(habitRef, {
-            'currentStreak': newStreak,
-            'longestStreak': newLongest,
-            'totalCompletions': totalCompletions + 1,
+            if (habitDoc.exists) {
+              final data = habitDoc.data();
+              
+              int currentStreak = 0;
+              int longestStreak = 0;
+              int totalCompletions = 0;
+              
+              if (data != null) {
+                currentStreak = (data['currentStreak'] is int) 
+                    ? data['currentStreak'] as int
+                    : (data['currentStreak'] as num?)?.toInt() ?? 0;
+                
+                longestStreak = (data['longestStreak'] is int)
+                    ? data['longestStreak'] as int
+                    : (data['longestStreak'] as num?)?.toInt() ?? 0;
+                
+                totalCompletions = (data['totalCompletions'] is int)
+                    ? data['totalCompletions'] as int
+                    : (data['totalCompletions'] as num?)?.toInt() ?? 0;
+              }
+              
+              final int newStreak = currentStreak + 1;
+              final int newLongest = newStreak > longestStreak ? newStreak : longestStreak;
+              
+              transaction.update(habitRef, {
+                'currentStreak': newStreak,
+                'longestStreak': newLongest,
+                'totalCompletions': totalCompletions + 1,
+              });
+            }
           });
-        }
-      });
+           if (user != null) {
+      final habitDoc = await habitRef.get();
+      final newStreak = ((habitDoc.data()?['currentStreak'] ?? 0) as num).toInt();
+
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      final currentLongest = ((userDoc.data()?['longestStreak'] ?? 0) as num).toInt();
+
+      if (newStreak > currentLongest) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({'longestStreak': newStreak});
+        print('🔥 Updated user longestStreak to $newStreak');
+      }
+    }
+
     } catch (e) {
       print('Error updating streak: $e');
     }

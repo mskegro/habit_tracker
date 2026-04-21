@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
-import '../../providers/theme_provider.dart';
 import 'package:gamified_habit_tracker/widgets/bottom_nav_bar.dart';
+import 'package:gamified_habit_tracker/screens/settings/privacy_policy_screen.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -135,8 +136,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -197,29 +196,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       _buildAccountInfo(),
 
                       const SizedBox(height: 32),
-
-                      const Text(
-                        'Appearance',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1E293B),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      _buildSettingTile(
-                        icon: Icons.dark_mode,
-                        title: 'Dark Mode',
-                        subtitle: 'Switch between light and dark theme',
-                        trailing: Switch(
-                          value: themeProvider.isDarkMode,
-                          onChanged: (value) {
-                            themeProvider.toggleTheme();
-                          },
-                          activeColor: const Color.fromARGB(255, 152, 62, 191),
-                        ),
-                      ),
 
                       const SizedBox(height: 32),
 
@@ -310,9 +286,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: 'Privacy Policy',
                         subtitle: 'View our privacy policy',
                         onTap: () {
-                          // TODO: Open privacy policy
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Privacy policy coming soon')),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PrivacyPolicyScreen(),
+                            ),
                           );
                         },
                       ),
@@ -329,18 +307,93 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      _buildSettingTile(
+                     _buildSettingTile(
                         icon: Icons.download,
                         title: 'Export Data',
                         subtitle: 'Download your habit data',
-                        onTap: () {
-                          // TODO: Implement data export
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Data export coming soon')),
-                          );
+                        onTap: () async {
+                          if (user == null) return;
+
+                          try {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Preparing your data...')),
+                            );
+
+                            final habitsSnapshot = await FirebaseFirestore.instance
+                                .collection('habits')
+                                .where('userId', isEqualTo: user!.uid)
+                                .get();
+
+                            final completionsSnapshot = await FirebaseFirestore.instance
+                                .collection('completions')
+                                .where('userId', isEqualTo: user!.uid)
+                                .get();
+
+                            final userDoc = await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(user!.uid)
+                                .get();
+                            final userData = userDoc.data() ?? {};
+
+                            final buffer = StringBuffer();
+
+                            buffer.writeln('=== HABIT LOVE DATA EXPORT ===');
+                            buffer.writeln('Exported: ${DateTime.now()}');
+                            buffer.writeln('User: ${user!.displayName ?? 'N/A'}');
+                            buffer.writeln('Email: ${user!.email ?? 'N/A'}');
+                            buffer.writeln('Level: ${userData['level'] ?? 1}');
+                            buffer.writeln('Total XP: ${userData['totalXP'] ?? 0}');
+                            buffer.writeln('Total Habits Completed: ${userData['totalHabitsCompleted'] ?? 0}');
+                            buffer.writeln('Longest Streak: ${userData['longestStreak'] ?? 0}');
+                            buffer.writeln('');
+
+                            buffer.writeln('=== HABITS ===');
+                            buffer.writeln('Name,Frequency,Created At,Is Active');
+                            for (var doc in habitsSnapshot.docs) {
+                              final data = doc.data();
+                              buffer.writeln(
+                                '${data['name'] ?? 'N/A'},'
+                                '${data['frequency'] ?? 'N/A'},'
+                                '${data['createdAt'] ?? 'N/A'},'
+                                '${data['isActive'] ?? false}',
+                              );
+                            }
+                            buffer.writeln('');
+
+                            buffer.writeln('=== COMPLETIONS ===');
+                            buffer.writeln('Habit Name,Date,XP Earned');
+                            for (var doc in completionsSnapshot.docs) {
+                              final data = doc.data();
+                              buffer.writeln(
+                                '${data['habitName'] ?? 'N/A'},'
+                                '${data['date'] ?? 'N/A'},'
+                                '${data['xpEarned'] ?? 0}',
+                              );
+                            }
+
+                            // Save to file
+                            final directory = await getApplicationDocumentsDirectory();
+                            final fileName = 'habit_love_export_${DateTime.now().millisecondsSinceEpoch}.csv';
+                            final file = File('${directory.path}/$fileName');
+                            await file.writeAsString(buffer.toString());
+
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('✅ Data exported to: ${file.path}'),
+                                  duration: const Duration(seconds: 5),
+                                ),
+                              );
+                            }
+                          } catch (e) {
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Export failed: $e')),
+                              );
+                            }
+                          }
                         },
                       ),
-
                       const SizedBox(height: 32),
 
                       const Text(

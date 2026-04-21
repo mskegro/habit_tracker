@@ -62,8 +62,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       }
-
                       final userData = snapshot.data!.data() as Map<String, dynamic>?;
+                      final unlockedAchievements = List<String>.from(userData?['unlockedAchievements'] ?? []);
                       final totalXP = ((userData?['totalXP'] ?? 0) as num).toInt();
                       final level = ((userData?['level'] ?? 1) as num).toInt();
                       final currentLevelXP = ((userData?['currentLevelXP'] ?? 0) as num).toInt();
@@ -76,6 +76,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         level: level,
                         totalCompleted: totalCompleted,
                         maxStreak: longestStreak,
+                        unlockedAchievements: unlockedAchievements,
                       );
 
                       final unlockedCount = achievements.where((a) => a['unlocked'] == true).length;
@@ -209,27 +210,34 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '$currentLevelXP / $xpToNextLevel XP',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    '$percentage% to next level',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                 child: Text(
+                  '$currentLevelXP / $xpToNextLevel XP',
+                  style: const TextStyle(
+                  color: Colors.white,
+                 fontSize: 14,
+                fontWeight: FontWeight.w600,
+                ),
+               overflow: TextOverflow.ellipsis,
               ),
+          ),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            '$percentage% to next level',
+           style: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+         ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    ),
               const SizedBox(height: 8),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -401,15 +409,15 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
   Map<String, dynamic> _getLevelInfo(int level) {
     if (level >= 10) return {'name': 'Transcendent', 'icon': '🌌', 'color': const Color(0xFF8B5CF6)};
-    if (level >= 9) return {'name': 'Divine', 'icon': '✨', 'color': const Color(0xFFEC4899)};
-    if (level >= 8) return {'name': 'Immortal', 'icon': '🌟', 'color': const Color(0xFFF59E0B)};
-    if (level >= 7) return {'name': 'Mythic', 'icon': '🔥', 'color': const Color(0xFFEF4444)};
-    if (level >= 6) return {'name': 'Legend', 'icon': '💎', 'color': const Color(0xFF06B6D4)};
+    if (level >= 9) return {'name': 'Divine', 'icon': '✨', 'color': const Color.fromARGB(255, 216, 69, 213)};
+    if (level >= 8) return {'name': 'Immortal', 'icon': '🌟', 'color': const Color.fromARGB(255, 245, 198, 11)};
+    if (level >= 7) return {'name': 'Mythic', 'icon': '🔥', 'color': const Color.fromARGB(255, 219, 73, 73)};
+    if (level >= 6) return {'name': 'Legend', 'icon': '💎', 'color': const Color.fromARGB(255, 37, 197, 225)};
     if (level >= 5) return {'name': 'Master', 'icon': '👑', 'color': const Color(0xFF8B5CF6)};
-    if (level >= 4) return {'name': 'Champion', 'icon': '🏆', 'color': const Color(0xFFF59E0B)};
-    if (level >= 3) return {'name': 'Achiever', 'icon': '⭐', 'color': const Color(0xFF10B981)};
+    if (level >= 4) return {'name': 'Champion', 'icon': '🏆', 'color': const Color.fromARGB(255, 224, 107, 29)};
+    if (level >= 3) return {'name': 'Achiever', 'icon': '⭐', 'color': const Color.fromARGB(255, 89, 221, 177)};
     if (level >= 2) return {'name': 'Learner', 'icon': '🔰', 'color': const Color(0xFF06B6D4)};
-    return {'name': 'Beginner', 'icon': '🌱', 'color': const Color(0xFF64748B)};
+    return {'name': 'Beginner', 'icon': '🌱', 'color': const Color.fromARGB(255, 226, 173, 223)};
   }
 
   Widget _buildProgressOverview(int unlockedCount, int totalCount) {
@@ -419,7 +427,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color.fromARGB(255, 203, 141, 242), Color.fromARGB(255, 102, 191, 242)],
+          colors: [Color.fromARGB(255, 177, 98, 225), Color.fromARGB(255, 204, 148, 221)],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
@@ -432,47 +440,52 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Achievement Progress',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Keep unlocking more!',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '$percentage%',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+       Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Achievement Progress',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
+          const SizedBox(height: 4),
+          const Text(
+            'Keep unlocking more!',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    ),
+    const SizedBox(width: 12),
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        '$percentage%',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+),
           const SizedBox(height: 16),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -602,13 +615,13 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   Color _getRarityColor(String rarity) {
     switch (rarity) {
       case 'legendary':
-        return const Color(0xFFEF4444);
+        return const Color.fromARGB(255, 62, 2, 57);
       case 'epic':
         return const Color(0xFF8B5CF6);
       case 'rare':
-        return const Color(0xFF06B6D4);
+        return const Color.fromARGB(255, 186, 114, 222);
       default:
-        return const Color(0xFF10B981);
+        return const Color.fromARGB(255, 203, 147, 194);
     }
   }
 
@@ -617,6 +630,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     required int level,
     required int totalCompleted,
     required int maxStreak,
+    required List<String> unlockedAchievements,
+
   }) {
     return [
       {
@@ -626,7 +641,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🎯',
         'xpReward': 10,
         'rarity': 'common',
-        'unlocked': totalCompleted > 0,
+        'unlocked': unlockedAchievements.contains('first_habit'),
       },
       {
         'id': 'first_completion',
@@ -635,7 +650,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '✅',
         'xpReward': 25,
         'rarity': 'common',
-        'unlocked': totalCompleted >= 1,
+        'unlocked': unlockedAchievements.contains('first_completion'),
       },
       {
         'id': 'streak_3',
@@ -644,7 +659,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🔥',
         'xpReward': 50,
         'rarity': 'common',
-        'unlocked': maxStreak >= 3,
+        'unlocked': unlockedAchievements.contains('streak_3'),
       },
       {
         'id': 'streak_7',
@@ -653,7 +668,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '💪',
         'xpReward': 100,
         'rarity': 'rare',
-        'unlocked': maxStreak >= 7,
+        'unlocked': unlockedAchievements.contains('streak_7'),
       },
       {
         'id': 'level_5',
@@ -662,7 +677,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '⭐',
         'xpReward': 75,
         'rarity': 'rare',
-        'unlocked': level >= 5,
+        'unlocked': unlockedAchievements.contains('level_5'),
       },
       {
         'id': 'completions_25',
@@ -671,7 +686,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🎖️',
         'xpReward': 150,
         'rarity': 'rare',
-        'unlocked': totalCompleted >= 25,
+        'unlocked': unlockedAchievements.contains('completions_25'),
       },
       {
         'id': 'streak_30',
@@ -680,7 +695,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '👑',
         'xpReward': 300,
         'rarity': 'epic',
-        'unlocked': maxStreak >= 30,
+        'unlocked': unlockedAchievements.contains('streak_30'),
       },
       {
         'id': 'level_10',
@@ -689,7 +704,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '💎',
         'xpReward': 200,
         'rarity': 'epic',
-        'unlocked': level >= 10,
+        'unlocked': unlockedAchievements.contains('level_10'),
       },
       {
         'id': 'completions_100',
@@ -698,7 +713,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🏆',
         'xpReward': 500,
         'rarity': 'epic',
-        'unlocked': totalCompleted >= 100,
+        'unlocked': unlockedAchievements.contains('completions_100'),
       },
       {
         'id': 'streak_100',
@@ -707,7 +722,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🌟',
         'xpReward': 1000,
         'rarity': 'legendary',
-        'unlocked': maxStreak >= 100,
+        'unlocked': unlockedAchievements.contains('streak_100'),
       },
       {
         'id': 'level_25',
@@ -716,7 +731,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🔱',
         'xpReward': 750,
         'rarity': 'legendary',
-        'unlocked': level >= 25,
+        'unlocked': unlockedAchievements.contains('level_25'),
       },
       {
         'id': 'completions_500',
@@ -725,7 +740,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
         'icon': '🎯',
         'xpReward': 2000,
         'rarity': 'legendary',
-        'unlocked': totalCompleted >= 500,
+        'unlocked': unlockedAchievements.contains('completions_500'),
       },
     ];
   }

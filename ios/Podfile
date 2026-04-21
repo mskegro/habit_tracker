@@ -1,13 +1,11 @@
 platform :ios, '26.0'
 
-# Use static linking to avoid Firebase conflicts
 use_frameworks! :linkage => :static
 use_modular_headers!
 
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
-# Dynamically locate Flutter SDK
-flutter_root = '/Volumes/seagate/flutter/flutter'
+flutter_root = '/Users/marinaskegro/flutter'
 require File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper')
 
 flutter_ios_podfile_setup
@@ -16,7 +14,6 @@ target 'Runner' do
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
-# ✅ This part ensures Flutter frameworks (like Flutter.h) are properly linked
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
