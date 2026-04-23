@@ -130,6 +130,7 @@
 - Clean architecture Flutter - https://resocoder.com/flutter-clean-architecture-tdd
 - Privacy Policy template - https://www.termsfeed.com/public/uploads/2021/12/sample-mobile-app-privacy-policy-template.pdf
 - MarkDown Format guide- https://www.markdownguide.org/basic-syntax/
+- Gamification - https://pmc.ncbi.nlm.nih.gov/articles/PMC10998180/ 
 
 ---
 
